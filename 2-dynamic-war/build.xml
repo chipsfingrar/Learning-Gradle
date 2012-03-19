@@ -2,17 +2,24 @@
 <project name="1-static-war" default="war">
 
   <target name="init">
+    <mkdir dir="build-ant"/>
     <mkdir dir="dist" />
   </target>
 
+  <target name="compile" depends="init" >
+    <javac destdir="build-ant/classes" debug="true" srcdir="src/main/java">
+   </javac>
+  </target>
+
   <target name="war" depends="init">
-    <war destfile="dist/1-static-war.war" needxmlfile='false' >
+    <war destfile="dist/2-static-war.war" needxmlfile='false' >
       <fileset dir="src/main/webapp"/>
     </war>
   </target>
 	
   <target name="clean">
     <delete dir="dist" />
+    <delete dir="build-ant" />
   </target>
 </project>
 
