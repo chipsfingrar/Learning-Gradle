@@ -1,0 +1,18 @@
+<?xml version="1.0" ?> 
+<project name="1-static-war" default="war">
+
+  <target name="init">
+    <mkdir dir="dist" />
+  </target>
+
+  <target name="war" depends="init">
+    <war destfile="dist/1-static-war.war" needxmlfile='false' >
+      <fileset dir="src/main/webapp"/>
+    </war>
+  </target>
+	
+  <target name="clean">
+    <delete dir="dist" />
+  </target>
+</project>
+
