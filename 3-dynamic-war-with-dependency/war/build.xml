@@ -1,0 +1,26 @@
+<?xml version="1.0" ?> 
+<project name="3-dynamic-war-withdependecy-war" default="war" basedir="../">
+
+  <target name="init">
+    <mkdir dir="war/build-ant/classes"/>
+    <mkdir dir="war/dist" />
+  </target>
+
+  <target name="compile" depends="init" >
+    <javac destdir="war/build-ant/classes" debug="true" srcdir="war/src/main/java">
+   </javac>
+  </target>
+
+  <target name="war" depends="compile">
+    <war destfile="war/dist/3-static-war.war" needxmlfile='false' >
+      <fileset dir="war/src/main/webapp"/>
+    	<lib dir="jar/dist"></lib>
+    	<classes dir="war/build-ant/classes"></classes>
+    </war>
+  </target>
+	
+  <target name="clean">
+    <delete dir="war/dist" />
+    <delete dir="war/build-ant" />
+  </target>
+</project>

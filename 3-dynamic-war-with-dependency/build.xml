@@ -1,0 +1,16 @@
+<?xml version="1.0" ?> 
+<project name="3-dynamic-war-withdependecy" default="build-all">
+
+  <import file="jar/build.xml" />
+  <import file="war/build.xml" />
+
+  <target name="build-all" >
+  	<antcall target="jar" inheritall="true"/>
+  	<antcall target="war" inheritall="true"/>
+  </target>
+	
+  <target name="clean">
+    <delete dir="dist" />
+    <delete dir="build-ant" />
+  </target>
+</project>
