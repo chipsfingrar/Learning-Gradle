@@ -1,19 +1,22 @@
 <?xml version="1.0" ?> 
 <project name="3-dynamic-war-withdependecy-jar" default="jar">
 
+  <property file="../build.properties" />
+
   <target name="init">
-    <mkdir dir="jar/build-ant/classes"/>
-    <mkdir dir="jar/dist" />
+    <mkdir dir="build-ant/classes"/>
+    <mkdir dir="dist" />
   </target>
 
   <target name="compile" depends="init" >
-    <javac destdir="jar/build-ant/classes" debug="true" srcdir="jar/src/main/java">
+    <javac destdir="build-ant/classes" debug="true" srcdir="src/main/java">
+    
    </javac>
   </target>
 
   <target name="jar" depends="compile">
-  	 <jar destfile="jar/dist/jar.jar"
-  	       basedir="jar/build-ant/classes"
+  	 <jar destfile="${libfolder}/jar.jar"
+  	       basedir="build-ant/classes"
   	  />
   </target>
 	
