@@ -1,0 +1,2 @@
+task customTask(type: se.elva.Hello)
+
