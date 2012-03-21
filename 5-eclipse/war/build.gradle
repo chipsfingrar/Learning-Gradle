@@ -1,0 +1,9 @@
+apply plugin: 'war'
+
+dependencies {
+  compile project(':jar')
+}
+
+war << {
+	println "Done building WAR file"
+}

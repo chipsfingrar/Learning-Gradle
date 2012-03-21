@@ -1,0 +1,6 @@
+<ivy-module version="2.0">
+    <info organisation="org.apache" module="3-dynamic-war-withdependecy-jar"/>
+    <dependencies>
+          <dependency org="junit" name="junit" rev="4.5" />
+    </dependencies>
+</ivy-module>
