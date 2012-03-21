@@ -1,28 +1,92 @@
 <?xml version="1.0" ?> 
-<project name="3-dynamic-war-withdependecy-jar" default="jar">
+<project name="3-dynamic-war-withdependecy-jar" default="jar" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+  <property name = "ivy.lib.dir" value="${homefolder}/extlib" />
+
+  <path id="lib.path.id">
+   <fileset dir="${ivy.lib.dir}" />
+  </path>
 
   <property file="../build.properties" />
 
+  <path id="classpath.test">
+    <fileset dir="${libfolderExt}" includes="*.jar" />
+    <pathelement location="build-ant/java/classes" />
+  </path>	
+
   <target name="init">
-    <mkdir dir="build-ant/classes"/>
+    <mkdir dir="build-ant/java/classes"/>
+    <mkdir dir="build-ant/test/classes"/>
     <mkdir dir="dist" />
   </target>
 
   <target name="compile" depends="init" >
-    <javac destdir="build-ant/classes" debug="true" srcdir="src/main/java">
-    
+    <javac destdir="build-ant/java/classes" debug="true" srcdir="src/main/java">
    </javac>
   </target>
 
   <target name="jar" depends="compile">
   	 <jar destfile="${libfolder}/jar.jar"
-  	       basedir="build-ant/classes"
+  	       basedir="build-ant/java/classes"
   	  />
   </target>
 
+  <target name="compile-test" depends="compile,resolve">
+    <javac srcdir="src/test/java" destdir="build-ant/test/classes">
+      <classpath refid="classpath.test"/>
+    </javac>
+  </target>	
+
+  <target name="test" depends="compile-test">
+    <junit>
+      <classpath refid="classpath.test" />
+
+      <formatter type="brief" usefile="false" />
+      <batchtest>
+        <fileset dir="build-ant/test/classes" includes="**/Test*.class" />
+      </batchtest>
+    </junit>
+  </target>
+ 
+
   <target name="clean">
     <delete dir="dist" />
-    <delete dir="build-ant/classes" />
+    <delete dir="build-ant" />
   </target>
+
+
+   <target name="resolve" description="--> retrieve dependencies with ivy" depends="init-ivy">
+        <ivy:retrieve />
+   </target>
+
+   <!-- Install ivy -->
+   <property name="ivy.install.version" value="2.1.0-rc2" />
+    <condition property="ivy.home" value="${env.IVY_HOME}">
+      <isset property="env.IVY_HOME" />
+    </condition>
+    <property name="ivy.home" value="${user.home}/.ant" />
+    <property name="ivy.jar.dir" value="${ivy.home}/lib" />
+    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
+
+    <target name="download-ivy" unless="offline">
+
+        <mkdir dir="${ivy.jar.dir}"/>
+        <!-- download Ivy from web site so that it can be used even without any special installation -->
+        <get src="http://repo2.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar" 
+             dest="${ivy.jar.file}" usetimestamp="true"/>
+    </target>
+
+    <target name="init-ivy" depends="download-ivy">
+      <!-- try to load ivy here from ivy home, in case the user has not already dropped
+              it into ant's lib dir (note that the latter copy will always take precedence).
+              We will not fail as long as local lib dir exists (it may be empty) and
+              ivy is in at least one of ant's lib dir or the local lib dir. -->
+        <path id="ivy.lib.path">
+            <fileset dir="${ivy.jar.dir}" includes="*.jar"/>
+
+        </path>
+        <taskdef resource="org/apache/ivy/ant/antlib.xml"
+                 uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+    </target>
 
 </project>
