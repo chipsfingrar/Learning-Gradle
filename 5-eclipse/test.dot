@@ -1,0 +1,57 @@
+:tasks
+
+------------------------------------------------------------
+All tasks runnable from root project
+------------------------------------------------------------
+
+Build tasks
+-----------
+jar:assemble - Assembles all Jar, War, Zip, and Tar archives. [jar:jar]
+war:assemble - Assembles all Jar, War, Zip, and Tar archives. [war:war]
+jar:build - Assembles and tests this project. [jar:assemble, jar:check]
+war:build - Assembles and tests this project. [war:assemble, war:check]
+jar:buildDependents - Assembles and tests this project and all projects that depend on it. [jar:build, war:buildDependents]
+war:buildDependents - Assembles and tests this project and all projects that depend on it. [war:build]
+jar:buildNeeded - Assembles and tests this project and all projects it depends on. [jar:build]
+war:buildNeeded - Assembles and tests this project and all projects it depends on. [jar:buildNeeded, war:build]
+jar:classes - Assembles the main classes.
+    jar:compileJava - Compiles the main Java source.
+    jar:processResources - Processes the main resources.
+war:classes - Assembles the main classes. [jar:jar]
+    war:compileJava - Compiles the main Java source.
+    war:processResources - Processes the main resources.
+jar:clean - Deletes the build directory.
+war:clean - Deletes the build directory.
+jar:jar - Assembles a jar archive containing the main classes. [jar:classes]
+war:jar - Assembles a jar archive containing the main classes. [war:classes]
+jar:testClasses - Assembles the test classes. [jar:classes]
+    jar:compileTestJava - Compiles the test Java source.
+    jar:processTestResources - Processes the test resources.
+war:testClasses - Assembles the test classes. [jar:jar, war:classes]
+    war:compileTestJava - Compiles the test Java source.
+    war:processTestResources - Processes the test resources.
+war:war - Generates a war archive with all the compiled classes, the web-app content and the libraries. [jar:jar, war:classes]
+
+Documentation tasks
+-------------------
+jar:javadoc - Generates Javadoc API documentation for the main source code. [jar:classes]
+war:javadoc - Generates Javadoc API documentation for the main source code. [jar:jar, jar:javadoc, war:classes]
+
+Help tasks
+----------
+dependencies - Displays the dependencies of root project '3-dynamic-war-with-dependency'.
+help - Displays a help message
+projects - Displays the sub-projects of root project '3-dynamic-war-with-dependency'.
+properties - Displays the properties of root project '3-dynamic-war-with-dependency'.
+tasks - Displays the tasks runnable from root project '3-dynamic-war-with-dependency' (some of the displayed tasks may belong to subprojects).
+
+Verification tasks
+------------------
+jar:check - Runs all checks. [jar:test]
+war:check - Runs all checks. [war:test]
+jar:test - Runs the unit tests. [jar:classes, jar:testClasses]
+war:test - Runs the unit tests. [jar:jar, war:classes, war:testClasses]
+
+BUILD SUCCESSFUL
+
+Total time: 3.37 secs

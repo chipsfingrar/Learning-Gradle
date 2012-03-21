@@ -1,0 +1,20 @@
+<?xml version="1.0" ?> 
+<project name="3-dynamic-war-withdependecy" default="build-all" >
+  <property file="../build.properties" />
+
+
+
+  <target name="build-all" >
+  	<ant antfile="jar/build.xml" target="jar" inheritall="false" useNativeBasedir="false"/>
+  	<ant antfile="war/build.xml" target="war" inheritall="false" useNativeBasedir="false"/>
+  </target>
+	
+  <target name="clean" >
+     <ant antfile="jar/build.xml" target="clean" />
+     <ant antfile="war/build.xml" target="clean" />
+  </target>
+
+
+
+   
+</project>
