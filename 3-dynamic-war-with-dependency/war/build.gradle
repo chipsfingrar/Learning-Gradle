@@ -1,11 +1,15 @@
 apply plugin: 'war'
 apply plugin: 'jetty'
 
+httpPort = 9000
+
 dependencies {
   compile project(':jar')
 }
 
-
+[jettyRun, jettyRunWar]*.doFirst {
+	println "Starting jetty on port $httpPort"
+}
 war << {
 	println "Done building WAR file"
 }
