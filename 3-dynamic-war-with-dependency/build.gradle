@@ -1,3 +1,10 @@
+
 subprojects {
   apply plugin: 'java'
+}
+
+gradle.taskGraph.beforeTask { task ->
+	if(task.project.name != 'jar') {
+		println "Executing $task .."
+	}	
 }
