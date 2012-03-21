@@ -1,1 +1,16 @@
 apply plugin: 'war'
+
+
+
+
+
+//Call a ant file
+ant.importBuild 'build.xml'
+
+task buildWithAnt {
+   dependsOn warAnt
+}
+
+task cleanAll{
+   dependsOn cleanAnt,clean
+}

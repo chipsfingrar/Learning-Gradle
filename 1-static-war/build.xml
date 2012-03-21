@@ -5,13 +5,13 @@
     <mkdir dir="dist" />
   </target>
 
-  <target name="war" depends="init">
+  <target name="warAnt" depends="init">
     <war destfile="dist/1-static-war.war" needxmlfile='false' >
       <fileset dir="src/main/webapp"/>
     </war>
   </target>
 	
-  <target name="clean">
+  <target name="cleanAnt">
     <delete dir="dist" />
   </target>
 </project>
